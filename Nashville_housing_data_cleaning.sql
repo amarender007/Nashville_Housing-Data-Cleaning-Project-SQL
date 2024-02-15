@@ -1,4 +1,4 @@
-select top 1 * from housing_data
+
 
 --Standerdizing the date in SalesDate column
 alter table housing_data
@@ -87,12 +87,12 @@ set soldasvacant = case when soldasvacant = 'Y' then 'Yes'
 with row_numcte as(
 select *, 
 ROW_NUMBER() over(partition by 
-							parcelid,
-							propertyaddress,
-							saledate,
-							saleprice,
-							legalreference
-							order by parcelid) as row_num
+				parcelid,
+				propertyaddress,
+				saledate,
+				saleprice,
+				legalreference
+				order by parcelid) as row_num
 from housing_data
 )
 select * from row_numcte where row_num > 1
@@ -101,12 +101,12 @@ select * from row_numcte where row_num > 1
 with row_numcte as(
 select *, 
 ROW_NUMBER() over(partition by 
-							parcelid,
-							propertyaddress,
-							saledate,
-							saleprice,
-							legalreference
-							order by parcelid) as row_num
+				parcelid,
+				propertyaddress,
+				saledate,
+				saleprice,
+				legalreference
+				order by parcelid) as row_num
 from housing_data
 )
 delete from row_numcte where row_num > 1
